@@ -5,23 +5,13 @@ const placeholder = document.querySelector('ul');
 
 const simpleTodoTasks = [
   {
-    description: '',
-    completed: true,
+    description: 'Wash the dishes',
+    completed: false,
     index: 0
   },
   {
-    description: '',
-    completed: true,
-    index: 0
-  },
-  {
-    description: '',
-    completed: true,
-    index: 0
-  },
-  {
-    description: '',
-    completed: true,
+    description: 'complete To Do list project',
+    completed: false,
     index: 0
   }
 ];
@@ -31,7 +21,7 @@ const populateEachTask = (arr) => {
     const taskDetails = arr[i];
     const taskContainer = document.createElement('li');
     taskContainer.className = 'task-container';
-    taskContainer.innerHTML = `<span class='task-content'>${taskDetails.description}</span><span class='task-content'>${taskDetails.completed}</span><span class='task-content'>index:${i}</span>`;
+    taskContainer.innerHTML = `<span class='task-content'>${taskDetails.completed}</span><span class='task-content'>${taskDetails.description}</span><span class='task-content index'>${i}</span>`;
     placeholder.appendChild(taskContainer);
   }
   return placeholder;
