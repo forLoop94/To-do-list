@@ -2,22 +2,21 @@ import './styles.css';
 
 const placeholder = document.querySelector('ul');
 
-
 const simpleTodoTasks = [
   {
     description: 'Wash the dishes',
     completed: false,
-    index: 0
+    index: 0,
   },
   {
     description: 'complete To Do list project',
     completed: false,
-    index: 0
-  }
+    index: 0,
+  },
 ];
 
 const populateEachTask = (arr) => {
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i += 1) {
     const taskDetails = arr[i];
     const taskContainer = document.createElement('li');
     taskContainer.className = 'task-container';
@@ -25,8 +24,6 @@ const populateEachTask = (arr) => {
     placeholder.appendChild(taskContainer);
   }
   return placeholder;
-}
+};
 
 populateEachTask(simpleTodoTasks);
-
-

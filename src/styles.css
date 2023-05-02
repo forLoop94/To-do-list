@@ -4,7 +4,7 @@
   box-sizing: border-box;
   font-size: 1.1rem;
   color: rgb(87, 86, 86);
-  font-family: poppins;
+  font-family: poppins, 'Times New Roman', Times, serif;
   font-weight: 500;
 }
 
@@ -23,6 +23,7 @@ body {
 main {
   width: 60%;
   background-color: white;
+
   /* padding: 2rem 0rem; */
   box-shadow: 10px 10px 10px rgb(154, 147, 147);
 }
@@ -36,7 +37,9 @@ ul {
   list-style-type: none;
 }
 
-.todo-heading, .input-field, .task-container {
+.todo-heading,
+.input-field,
+.task-container {
   border-bottom: 2px solid rgb(228, 226, 226);
   padding: 1rem;
 }
@@ -73,5 +76,3 @@ ul {
   position: absolute;
   right: 0;
 }
-
-
