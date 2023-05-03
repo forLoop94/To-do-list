@@ -11,7 +11,7 @@ const simpleTodoTasks = [
   {
     description: 'complete To Do list project',
     completed: false,
-    index: 0,
+    index: 1,
   },
 ];
 
@@ -20,7 +20,10 @@ const populateEachTask = (arr) => {
     const taskDetails = arr[i];
     const taskContainer = document.createElement('li');
     taskContainer.className = 'task-container';
-    taskContainer.innerHTML = `<span class='task-content'><input type='checkbox'></span><span class='task-content'>${taskDetails.description}</span><span class='task-content index'><i class='fa fa-ellipsis-v'></i></span>`;
+    taskContainer.innerHTML = `<span class='task-content'><input type='checkbox'></span>
+    <span class='task-content'>${taskDetails.description}</span>
+    <span class='task-content index'>
+    <i class='fa fa-ellipsis-v'></i></span>`;
     placeholder.appendChild(taskContainer);
   }
   return placeholder;
