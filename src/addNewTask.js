@@ -5,11 +5,12 @@ const addNewTask = (arr, item) => {
   function Task(item){
     this.item = item;
     this.completed = true;
-    this.index = 1;
+    this.index = arr.length;
   }
   const task = new Task(item);
   arr.push(task);
   // arr = arr.concat(task);
+  localStorage.setItem('task', JSON.stringify(arr));
 }
 
 
