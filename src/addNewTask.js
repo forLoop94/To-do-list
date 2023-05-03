@@ -7,10 +7,9 @@ const addNewTask = (arr, item) => {
     this.completed = true;
     this.index = 1;
   }
-
   const task = new Task(item);
-
   arr.push(task);
+  // arr = arr.concat(task);
 }
 
 
