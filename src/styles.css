@@ -31,6 +31,8 @@ main {
 .placeholder {
   font-style: italic;
   color: rgb(154, 150, 150);
+  border: none;
+  width: 90%;
 }
 
 ul {
@@ -50,13 +52,6 @@ ul {
 
 .fa-refresh {
   padding-top: 5px;
-}
-
-.checkbox {
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid rgb(154, 150, 150);
-  float: left;
 }
 
 .fa-ellipsis-v {

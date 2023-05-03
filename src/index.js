@@ -1,19 +1,15 @@
+
 import './styles.css';
+import { addNewTask, form, input } from './addNewTask';
 
 const placeholder = document.querySelector('ul');
 
-const simpleTodoTasks = [
-  {
-    description: 'Wash the dishes',
-    completed: false,
-    index: 0,
-  },
-  {
-    description: 'complete To Do list project',
-    completed: false,
-    index: 0,
-  },
-];
+const simpleTodoTasks = [];
+
+form.addEventListener('submit', () => {
+  addNewTask(simpleTodoTasks, input.value);
+  console.log(simpleTodoTasks);
+})
 
 const populateEachTask = (arr) => {
   for (let i = 0; i < arr.length; i += 1) {
