@@ -2,36 +2,27 @@
 import './styles.css';
 import { addNewTask, form, input } from './addNewTask';
 import removeTask from './removeTask';
-import editTask from './editTask';
-// import populateEachTask from './populateTasks';
 
 const placeholder = document.querySelector('ul');
 
-let simpleTodoTasks = [];
-
-const task = localStorage.getItem('task');
-const allTasks = JSON.parse(task);
-if (task) {
-  simpleTodoTasks = allTasks;
-}
+let simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
 
 form.addEventListener('submit', () => {
   addNewTask(simpleTodoTasks, input.value);
   populateEachTask(simpleTodoTasks);
-  console.log(simpleTodoTasks)
 })
 
 const populateEachTask = (arr) => {
+  localStorage.setItem('task',JSON.stringify(simpleTodoTasks))
   placeholder.innerHTML = '';
   for (let i = 0; i < arr.length; i += 1) {
     const taskDetails = arr[i];
     const taskContainer = document.createElement('li');
+    taskContainer.setAttribute('data-id', i);
     taskContainer.className = 'task-container';
     taskContainer.innerHTML = `<span class='task-content'><input type='checkbox'></span><span class='task-content description'>${taskDetails.item}</span>
-    <span class='edit hide'>${taskDetails.item}</span>
+    <input class='edit hide' value=${taskDetails.item}>
     <span class='task-content index'><i class='fa fa-ellipsis-v'></i></span>`;
-
-    const taskDescription = document.querySelectorAll('.description');
 
     const editBtn = document.createElement('i');
     editBtn.className = 'fa';
@@ -41,28 +32,36 @@ const populateEachTask = (arr) => {
     const removeBtn = document.createElement('i');
     removeBtn.className = 'fa';
     removeBtn.classList.add('fa-trash');
-    removeBtn.addEventListener('click', () => {
-      removeTask(simpleTodoTasks, i);
-      populateEachTask(simpleTodoTasks);
-    })
+    removeBtn.addEventListener('click', removeList)
+   
     taskContainer.appendChild(removeBtn);
     placeholder.appendChild(taskContainer);
+
+    editBtn.addEventListener('click', editDescription);
   }
 };
 
-editBtn.addEventListener('click', () => {
-  for (let j = 0; j <= taskDescription.length; j += 1) {
-    console.log('cliked j')
-    if (j === i) {
-      console.log('cliked j')
-      // taskDescription.contentEditable = true;
-      // taskDescription.style.backgroundColor = 'red'
+const removeList = (e) => {
+  const li = e.target.closest('li');
+  const id = li.getAttribute('data-id');
+  removeTask(simpleTodoTasks, id);
+  populateEachTask(simpleTodoTasks);
+}
+
+const editDescription = (e) => {
+  const li = e.target.closest('li');
+  const id = li.getAttribute('data-id');
+  const description = li.children[1];
+  const input = li.children[2];
+  description.style.display = 'none';
+  input.classList.toggle('hide', false);
+  input.focus();
+  input.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      simpleTodoTasks[id].item = input.value;
+      populateEachTask(simpleTodoTasks);
     }
-  }
-  // editTask(simpleTodoTasks, taskDescription);
-  // populateEachTask(simpleTodoTasks);
-})
+  })
+}
 
 populateEachTask(simpleTodoTasks);
-
-export default simpleTodoTasks;

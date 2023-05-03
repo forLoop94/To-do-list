@@ -4,7 +4,7 @@ const input = document.querySelector('.placeholder');
 const addNewTask = (arr, item) => {
   function Task(item){
     this.item = item;
-    this.completed = true;
+    this.completed = false;
     this.index = arr.length;
   }
   const task = new Task(item);

@@ -83,6 +83,20 @@ ul {
   right: 0;
 }
 
+.fa-pencil, .fa-trash {
+  margin-right: 3.5rem;
+  position: absolute;
+  right: 0;
+}
+
+.fa-trash {
+  margin-right: 2rem;
+}
+
+.edit {
+  width: 40%;
+}
+
 .hide {
   display: none;
 }
