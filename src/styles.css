@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1.1rem;
+  color: rgb(87, 86, 86);
+  font-family: poppins, 'Times New Roman', Times, serif;
+  font-weight: 500;
+}
+
+.flex {
+  display: flex;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(241, 236, 236);
+}
+
+main {
+  width: 60%;
+  background-color: white;
+
+  /* padding: 2rem 0rem; */
+  box-shadow: 10px 10px 10px rgb(154, 147, 147);
+}
+
+.placeholder {
+  font-style: italic;
+  color: rgb(154, 150, 150);
+  border: none;
+  width: 90%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.todo-heading,
+.input-field,
+.task-container {
+  border-bottom: 2px solid rgb(228, 226, 226);
+  padding: 1rem;
+}
+
+.todo-heading {
+  justify-content: space-between;
+}
+
+.fa-refresh {
+  padding-top: 5px;
+}
+
+.fa-ellipsis-v {
+  color: rgb(154, 150, 150);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+}
+
+.footer p {
+  color: rgb(154, 150, 150);
+}
+
+.task-content {
+  margin-right: 2rem;
+}
+
+.task-container {
+  position: relative;
+}
+
+.index {
+  margin-right: 1rem;
+  position: absolute;
+  right: 0;
+}
+
+.hide {
+  display: none;
+}
