@@ -20,9 +20,9 @@ const populateEachTask = (arr) => {
     const taskContainer = document.createElement('li');
     taskContainer.setAttribute('data-id', i);
     taskContainer.className = 'task-container';
-    taskContainer.innerHTML = `<span class='task-content'><input type='checkbox'></span><span class='task-content description'>${taskDetails.item}</span>
+    taskContainer.innerHTML = `<span class='task-content'><input type='checkbox' data-check></span><span class='task-content description'>${taskDetails.item}</span>
     <input class='edit hide' value=${taskDetails.item}>
-    <span class='task-content index'><i class='fa fa-ellipsis-v'></i></span>`;
+    <span class='task-content index'></i></span>`;
 
     const editBtn = document.createElement('i');
     editBtn.className = 'fa';

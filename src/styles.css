@@ -32,7 +32,7 @@ main {
   font-style: italic;
   color: rgb(154, 150, 150);
   border: none;
-  width: 90%;
+  width: 60%;
 }
 
 ul {
@@ -83,14 +83,14 @@ ul {
   right: 0;
 }
 
-.fa-pencil, .fa-trash {
-  margin-right: 3.5rem;
+.fa-pencil, .fa-trash{
+  margin-right: 2.5rem;
   position: absolute;
   right: 0;
 }
 
 .fa-trash {
-  margin-right: 2rem;
+  margin-right: 1rem;
 }
 
 .edit {
@@ -99,4 +99,18 @@ ul {
 
 .hide {
   display: none;
+}
+
+.add-btn {
+  background: transparent;
+  border: none;
+}
+
+.fa-sign-in {
+  color: rgb(99, 96, 96);
+
+}
+
+form {
+  justify-content: space-between;
 }
