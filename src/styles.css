@@ -62,7 +62,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 4rem;
+  height: 6rem;
 }
 
 .footer p {
@@ -113,4 +113,13 @@ ul {
 
 form {
   justify-content: space-between;
+}
+
+.clear-completed {
+  padding: 1rem 4rem;
+}
+
+.clear-completed:hover {
+  color: black;
+  cursor: pointer;
 }

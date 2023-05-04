@@ -2,9 +2,10 @@
 import './styles.css';
 import { addNewTask, form, input } from './addNewTask.js';
 import removeTask from './removeTask.js';
-import arr from './completedTasks';
+import clearCompleted from './clearCompleted.js';
 
 const placeholder = document.querySelector('ul');
+const clearAllCompleted = document.querySelector('[data-clear]');
 
 const simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
 
@@ -104,5 +105,10 @@ const editDescription = (e) => {
     }
   });
 };
+
+clearAllCompleted.addEventListener('click', () => {
+  clearCompleted(simpleTodoTasks);
+  populateEachTask(simpleTodoTasks);
+})
 
 populateEachTask(simpleTodoTasks);
