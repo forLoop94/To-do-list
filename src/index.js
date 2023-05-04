@@ -1,19 +1,18 @@
-
 import './styles.css';
-import { addNewTask, form, input } from './addNewTask';
-import removeTask from './removeTask';
+import { addNewTask, form, input } from './addNewTask.js';
+import removeTask from './removeTask.js';
 
 const placeholder = document.querySelector('ul');
 
-let simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
+const simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
 
 form.addEventListener('submit', () => {
   addNewTask(simpleTodoTasks, input.value);
   populateEachTask(simpleTodoTasks);
-})
+});
 
 const populateEachTask = (arr) => {
-  localStorage.setItem('task',JSON.stringify(simpleTodoTasks))
+  localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
   placeholder.innerHTML = '';
   for (let i = 0; i < arr.length; i += 1) {
     const taskDetails = arr[i];
@@ -32,8 +31,8 @@ const populateEachTask = (arr) => {
     const removeBtn = document.createElement('i');
     removeBtn.className = 'fa';
     removeBtn.classList.add('fa-trash');
-    removeBtn.addEventListener('click', removeList)
-   
+    removeBtn.addEventListener('click', removeList);
+
     taskContainer.appendChild(removeBtn);
     placeholder.appendChild(taskContainer);
 
@@ -46,13 +45,17 @@ const removeList = (e) => {
   const id = li.getAttribute('data-id');
   removeTask(simpleTodoTasks, id);
   populateEachTask(simpleTodoTasks);
-}
+};
 
 const editDescription = (e) => {
   const li = e.target.closest('li');
+  li.style.backgroundColor = 'rgb(246, 204, 204)';
   const id = li.getAttribute('data-id');
   const description = li.children[1];
   const input = li.children[2];
+  const closeTask = li.children[5];
+  e.target.style.display = 'none';
+  closeTask.style.marginRight = '1rem';
   description.style.display = 'none';
   input.classList.toggle('hide', false);
   input.focus();
@@ -61,7 +64,7 @@ const editDescription = (e) => {
       simpleTodoTasks[id].item = input.value;
       populateEachTask(simpleTodoTasks);
     }
-  })
-}
+  });
+};
 
 populateEachTask(simpleTodoTasks);

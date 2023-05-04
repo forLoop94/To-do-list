@@ -83,7 +83,8 @@ ul {
   right: 0;
 }
 
-.fa-pencil, .fa-trash{
+.fa-pencil,
+.fa-trash {
   margin-right: 2.5rem;
   position: absolute;
   right: 0;
@@ -108,7 +109,6 @@ ul {
 
 .fa-sign-in {
   color: rgb(99, 96, 96);
-
 }
 
 form {
