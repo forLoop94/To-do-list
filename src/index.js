@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import './styles.css';
 import { addNewTask, form, input } from './addNewTask.js';
 import removeTask from './removeTask.js';
@@ -5,11 +6,6 @@ import removeTask from './removeTask.js';
 const placeholder = document.querySelector('ul');
 
 const simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
-
-form.addEventListener('submit', () => {
-  addNewTask(simpleTodoTasks, input.value);
-  populateEachTask(simpleTodoTasks);
-});
 
 const populateEachTask = (arr) => {
   localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
@@ -39,6 +35,11 @@ const populateEachTask = (arr) => {
     editBtn.addEventListener('click', editDescription);
   }
 };
+
+form.addEventListener('submit', () => {
+  addNewTask(simpleTodoTasks, input.value);
+  populateEachTask(simpleTodoTasks);
+});
 
 const removeList = (e) => {
   const li = e.target.closest('li');
