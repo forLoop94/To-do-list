@@ -59,23 +59,15 @@ const completed = (e) => {
   const id = li.getAttribute('data-id');
   const checkbox = li.children[0];
   console.log(checkbox.checked);
-  toogle(checkbox);
-  // toogle(checkbox);
-  // if (checkbox.checked) {
-  //   checkbox.checked = false;
-  //   simpleTodoTasks[id].completed = false;
-  // } else {
-  //   checkbox.checked = true;
+  
+  // if(checkbox.checked === true) {
   //   simpleTodoTasks[id].completed = true;
+  //   populateEachTask(simpleTodoTasks);
+  // } else {
+  //   simpleTodoTasks[id].completed = false;
+  //   populateEachTask(simpleTodoTasks);
   // }
   // localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
-  if(checkbox.checked === true) {
-    simpleTodoTasks[id].completed = true;
-    populateEachTask(simpleTodoTasks);
-  } else {
-    simpleTodoTasks[id].completed = false;
-    populateEachTask(simpleTodoTasks);
-  }
 }
 
 const removeList = (e) => {
