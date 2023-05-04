@@ -8,7 +8,7 @@ const placeholder = document.querySelector('ul');
 const simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
 
 const populateEachTask = (arr) => {
-  localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
+  localStorage.setItem('task', JSON.stringify(arr));
   placeholder.innerHTML = '';
   for (let i = 0; i < arr.length; i += 1) {
     const taskDetails = arr[i];
@@ -16,8 +16,8 @@ const populateEachTask = (arr) => {
     taskContainer.setAttribute('data-id', i);
     taskContainer.className = 'task-container';
     taskContainer.innerHTML = `<input class='task-content' type='checkbox' data-check><span class='task-content description'>${taskDetails.item}</span>
-    <input class='edit hide' value=${taskDetails.item}>
-    <span class='task-content index'></i></span>`;
+    <input class='edit hide'>
+    <span class='task-content index'></span>`;
 
     const editBtn = document.createElement('i');
     editBtn.className = 'fa';
@@ -56,6 +56,7 @@ const editDescription = (e) => {
   const id = li.getAttribute('data-id');
   const description = li.children[1];
   const input = li.children[2];
+  input.value = description.textContent;
   const closeTask = li.children[5];
   e.target.style.display = 'none';
   closeTask.style.marginRight = '1rem';
