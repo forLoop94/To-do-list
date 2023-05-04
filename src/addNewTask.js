@@ -9,7 +9,6 @@ const addNewTask = (arr, item) => {
   }
   const task = new Task(item);
   arr.push(task);
-  // arr = arr.concat(task);
   localStorage.setItem('task', JSON.stringify(arr));
 };
 

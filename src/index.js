@@ -2,7 +2,6 @@
 import './styles.css';
 import { addNewTask, form, input } from './addNewTask.js';
 import removeTask from './removeTask.js';
-import arr from './completedTasks';
 
 const placeholder = document.querySelector('ul');
 
@@ -19,9 +18,6 @@ const populateEachTask = (arr) => {
     taskContainer.innerHTML = `<input class='task-content' type='checkbox' data-check><span class='task-content description'>${taskDetails.item}</span>
     <input class='edit hide' value=${taskDetails.item}>
     <span class='task-content index'></i></span>`;
-
-    const checkbox = taskContainer.children[0];
-    checkbox.addEventListener('change', completed)
 
     const editBtn = document.createElement('i');
     editBtn.className = 'fa';
@@ -43,45 +39,14 @@ const populateEachTask = (arr) => {
 form.addEventListener('submit', () => {
   addNewTask(simpleTodoTasks, input.value);
   populateEachTask(simpleTodoTasks);
+  input.value = '';
 });
-
-const toogle = (element) => {
-  if (element.checked === true) {
-    element.checked = false;
-  } else if (element.checked === false) {
-    element.checked = true;
-  }
-}
-
-const completed = (e) => {
-  const li = e.target.closest('li');
-  const id = li.getAttribute('data-id');
-  const checkbox = li.children[0];
-  console.log(checkbox.checked);
-  toogle(checkbox);
-  // toogle(checkbox);
-  // if (checkbox.checked) {
-  //   checkbox.checked = false;
-  //   simpleTodoTasks[id].completed = false;
-  // } else {
-  //   checkbox.checked = true;
-  //   simpleTodoTasks[id].completed = true;
-  // }
-  // localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
-  if(checkbox.checked === true) {
-    simpleTodoTasks[id].completed = true;
-    populateEachTask(simpleTodoTasks);
-  } else {
-    simpleTodoTasks[id].completed = false;
-    populateEachTask(simpleTodoTasks);
-  }
-}
 
 const removeList = (e) => {
   const li = e.target.closest('li');
   const id = li.getAttribute('data-id');
   removeTask(simpleTodoTasks, id);
-  simpleTodoTasks.forEach((obj,id)=> obj.index = id)
+  simpleTodoTasks.forEach((obj, id) => { obj.index = id; });
   populateEachTask(simpleTodoTasks);
 };
 
