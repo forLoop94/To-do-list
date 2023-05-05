@@ -1,6 +1,5 @@
 const clearCompleted = (arr) => {
-  arr.filter(obj => {
-    console.log(obj.completed === false);
+ return arr.filter(obj => {
     return obj.completed === false;
   });
 }

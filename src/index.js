@@ -9,7 +9,7 @@ const clearAllCompleted = document.querySelector('[data-clear]');
 
 const simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
 
-const populateEachTask = (arr) => {
+const render = (arr) => {
   localStorage.setItem('task', JSON.stringify(arr));
   placeholder.innerHTML = '';
   for (let i = 0; i < arr.length; i += 1) {
@@ -17,7 +17,7 @@ const populateEachTask = (arr) => {
     const taskContainer = document.createElement('li');
     taskContainer.setAttribute('data-id', i);
     taskContainer.className = 'task-container';
-    taskContainer.innerHTML = `<input class='task-content' id='check-${i}' type='checkbox' ${taskDetails.completed ? 'checked' : '' }data-check><span class='task-content description'>${taskDetails.item}</span>
+    taskContainer.innerHTML = `<input class='task-content' id='check-${i}' type='checkbox' data-check><span class='task-content description'>${taskDetails.item}</span>
     <input class='edit hide' value=${taskDetails.item}>
     <span class='task-content index'></i></span>`;
 
@@ -37,51 +37,36 @@ const populateEachTask = (arr) => {
     editBtn.addEventListener('click', editDescription);
 
     const checkbox = document.getElementById('check-'+i)
-    checkbox.addEventListener('change', change)
-  
-    checkbox.nextSibling.classList.toggle('strike', checkbox.checked);
     
-    // checkbox.nextSibling.classList.add('strike');
-
-   
-    console.log(i, (checkbox.checked))
-
+    checkbox.addEventListener('change', change)
+    if(taskDetails.completed){
+      checkbox.nextSibling.classList.add('strike');
+      checkbox.setAttribute('checked', '')
+    }
   }
 };
 
+
 form.addEventListener('submit', () => {
   addNewTask(simpleTodoTasks, input.value);
-  populateEachTask(simpleTodoTasks);
+  render(simpleTodoTasks);
   input.value = '';
 });
 
-const toogle = (element) => {
-  if (element.checked === true) {
-    element.checked = false;
-  } else if (element.checked === false) {
-    element.checked = true;
-  }
-}
-
 const change = (e) => {
-  
    const li = e.target.closest('li');
    const id = li.getAttribute('data-id');
    const checkbox = e.target;
   console.log(id, checkbox.checked)
   
-  // if(checkbox.checked) {
-  //   console.log('if ',checkbox.checked);
-
-  //   simpleTodoTasks[id].completed = true;
-  //   populateEachTask(simpleTodoTasks);
-  // } else {
-  //   console.log('else',checkbox.checked);
-
-  //   simpleTodoTasks[id].completed = false;
-  //   populateEachTask(simpleTodoTasks);
-  //}
-  // localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
+  if(checkbox.checked) {
+    checkbox.nextSibling.classList.toggle('strike', true);
+    simpleTodoTasks[id].completed = true;
+  } else {
+    checkbox.nextSibling.classList.toggle('strike', false);
+    simpleTodoTasks[id].completed = false;
+  }
+  localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
 }
 
 const removeList = (e) => {
@@ -89,7 +74,7 @@ const removeList = (e) => {
   const id = li.getAttribute('data-id');
   removeTask(simpleTodoTasks, id);
   simpleTodoTasks.forEach((obj, id) => { obj.index = id + 1; });
-  populateEachTask(simpleTodoTasks);
+  render(simpleTodoTasks);
 };
 
 const editDescription = (e) => {
@@ -108,14 +93,15 @@ const editDescription = (e) => {
   input.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') {
       simpleTodoTasks[id].item = input.value;
-      populateEachTask(simpleTodoTasks);
+      render(simpleTodoTasks);
     }
   });
 };
 
 clearAllCompleted.addEventListener('click', () => {
-  clearCompleted(simpleTodoTasks);
-  populateEachTask(simpleTodoTasks);
+  const cleared = clearCompleted(simpleTodoTasks);
+  localStorage.setItem('task', JSON.stringify(cleared));
+  render(cleared);
 })
 
-populateEachTask(simpleTodoTasks);
+render(simpleTodoTasks);
