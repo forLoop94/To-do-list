@@ -1,7 +1,10 @@
+import saveToLocal from "./saveToLocal";
+
 const clearCompleted = (arr) => {
- return arr.filter(obj => {
+  const filterArr = arr.filter(obj => {
     return obj.completed === false;
   });
+  saveToLocal(filterArr);
 }
 
 export default clearCompleted;

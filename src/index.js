@@ -3,14 +3,23 @@ import './styles.css';
 import { addNewTask, form, input } from './addNewTask.js';
 import removeTask from './removeTask.js';
 import clearCompleted from './clearCompleted.js';
+import { isArray } from 'lodash';
+import saveToLocal from './saveToLocal.js';
 
 const placeholder = document.querySelector('ul');
 const clearAllCompleted = document.querySelector('[data-clear]');
 
-const simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
+// const simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
 
-const render = (arr) => {
-  localStorage.setItem('task', JSON.stringify(arr));
+const data = JSON.parse(localStorage.getItem('task'))
+if(!data) localStorage.setItem('task', '[]')
+
+const retrieve = () => {
+  return JSON.parse(localStorage.getItem('task'))
+}
+
+const render = () => {
+  const arr = retrieve();
   placeholder.innerHTML = '';
   for (let i = 0; i < arr.length; i += 1) {
     const taskDetails = arr[i];
@@ -48,8 +57,9 @@ const render = (arr) => {
 
 
 form.addEventListener('submit', () => {
+  const simpleTodoTasks = retrieve();
   addNewTask(simpleTodoTasks, input.value);
-  render(simpleTodoTasks);
+  render();
   input.value = '';
 });
 
@@ -57,7 +67,7 @@ const change = (e) => {
    const li = e.target.closest('li');
    const id = li.getAttribute('data-id');
    const checkbox = e.target;
-  console.log(id, checkbox.checked)
+   const simpleTodoTasks = retrieve();
   
   if(checkbox.checked) {
     checkbox.nextSibling.classList.toggle('strike', true);
@@ -70,11 +80,12 @@ const change = (e) => {
 }
 
 const removeList = (e) => {
+  const simpleTodoTasks = retrieve();
   const li = e.target.closest('li');
   const id = li.getAttribute('data-id');
   removeTask(simpleTodoTasks, id);
-  simpleTodoTasks.forEach((obj, id) => { obj.index = id + 1; });
-  render(simpleTodoTasks);
+  // simpleTodoTasks.forEach((obj, id) => { obj.index = id + 1; });
+  render();
 };
 
 const editDescription = (e) => {
@@ -92,16 +103,18 @@ const editDescription = (e) => {
   input.focus();
   input.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') {
+      const simpleTodoTasks = retrieve();
       simpleTodoTasks[id].item = input.value;
-      render(simpleTodoTasks);
+      saveToLocal(simpleTodoTasks);
+      render();
     }
   });
 };
 
 clearAllCompleted.addEventListener('click', () => {
-  const cleared = clearCompleted(simpleTodoTasks);
-  localStorage.setItem('task', JSON.stringify(cleared));
-  render(cleared);
+  const simpleTodoTasks = retrieve();
+  clearCompleted(simpleTodoTasks);
+  render();
 })
 
-render(simpleTodoTasks);
+render();

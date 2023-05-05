@@ -127,3 +127,7 @@ form {
 .strike {
   text-decoration: line-through;
 }
+
+.unstrike {
+  text-decoration: none;
+}
