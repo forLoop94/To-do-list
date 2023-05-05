@@ -4,12 +4,11 @@ const input = document.querySelector('.placeholder');
 const addNewTask = (arr, item) => {
   function Task(item) {
     this.item = item;
-    this.completed = true;
-    this.index = arr.length;
+    this.completed = false;
+    this.index = arr.length + 1;
   }
   const task = new Task(item);
   arr.push(task);
-  // arr = arr.concat(task);
   localStorage.setItem('task', JSON.stringify(arr));
 };
 

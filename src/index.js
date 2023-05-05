@@ -10,7 +10,7 @@ const clearAllCompleted = document.querySelector('[data-clear]');
 const simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
 
 const populateEachTask = (arr) => {
-  localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
+  localStorage.setItem('task', JSON.stringify(arr));
   placeholder.innerHTML = '';
   for (let i = 0; i < arr.length; i += 1) {
     const taskDetails = arr[i];
@@ -52,6 +52,7 @@ const populateEachTask = (arr) => {
 form.addEventListener('submit', () => {
   addNewTask(simpleTodoTasks, input.value);
   populateEachTask(simpleTodoTasks);
+  input.value = '';
 });
 
 const toogle = (element) => {
@@ -87,7 +88,7 @@ const removeList = (e) => {
   const li = e.target.closest('li');
   const id = li.getAttribute('data-id');
   removeTask(simpleTodoTasks, id);
-  simpleTodoTasks.forEach((obj,id)=> obj.index = id)
+  simpleTodoTasks.forEach((obj, id) => { obj.index = id + 1; });
   populateEachTask(simpleTodoTasks);
 };
 
@@ -97,6 +98,7 @@ const editDescription = (e) => {
   const id = li.getAttribute('data-id');
   const description = li.children[1];
   const input = li.children[2];
+  input.value = description.textContent;
   const closeTask = li.children[5];
   e.target.style.display = 'none';
   closeTask.style.marginRight = '1rem';
