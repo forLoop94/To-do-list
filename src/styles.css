@@ -124,6 +124,6 @@ form {
   cursor: pointer;
 }
 
-.striked {
+.strike {
   text-decoration: line-through;
 }

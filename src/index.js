@@ -17,7 +17,7 @@ const populateEachTask = (arr) => {
     const taskContainer = document.createElement('li');
     taskContainer.setAttribute('data-id', i);
     taskContainer.className = 'task-container';
-    taskContainer.innerHTML = `<input class='task-content' id='check-${i}' type='checkbox' ${arr.completed}? 'checked':'' data-check><span class='task-content description'>${taskDetails.item}</span>
+    taskContainer.innerHTML = `<input class='task-content' id='check-${i}' type='checkbox' ${taskDetails.completed ? 'checked' : '' }data-check><span class='task-content description'>${taskDetails.item}</span>
     <input class='edit hide' value=${taskDetails.item}>
     <span class='task-content index'></i></span>`;
 
@@ -39,9 +39,12 @@ const populateEachTask = (arr) => {
     const checkbox = document.getElementById('check-'+i)
     checkbox.addEventListener('change', change)
   
-    checkbox.nextSibling.classList.toggle('striked', checkbox.checked)
+    checkbox.nextSibling.classList.toggle('strike', checkbox.checked);
+    
+    // checkbox.nextSibling.classList.add('strike');
+
    
-    console.log(i, typeof(checkbox.checked))
+    console.log(i, (checkbox.checked))
 
   }
 };
@@ -60,9 +63,11 @@ const toogle = (element) => {
 }
 
 const change = (e) => {
-  //  const li = e.target.closest('li');
-  //  const id = li.getAttribute('data-id');
-  //  const checkbox = e.target;
+  
+   const li = e.target.closest('li');
+   const id = li.getAttribute('data-id');
+   const checkbox = e.target;
+  console.log(id, checkbox.checked)
   
   // if(checkbox.checked) {
   //   console.log('if ',checkbox.checked);
@@ -75,7 +80,7 @@ const change = (e) => {
   //   simpleTodoTasks[id].completed = false;
   //   populateEachTask(simpleTodoTasks);
   //}
-  localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
+  // localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
 }
 
 const removeList = (e) => {
