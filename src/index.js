@@ -17,12 +17,9 @@ const populateEachTask = (arr) => {
     const taskContainer = document.createElement('li');
     taskContainer.setAttribute('data-id', i);
     taskContainer.className = 'task-container';
-    taskContainer.innerHTML = `<input class='task-content' type='checkbox' data-check><span class='task-content description'>${taskDetails.item}</span>
+    taskContainer.innerHTML = `<input class='task-content' id='check-${i}' type='checkbox' ${arr.completed}? 'checked':'' data-check><span class='task-content description'>${taskDetails.item}</span>
     <input class='edit hide' value=${taskDetails.item}>
     <span class='task-content index'></i></span>`;
-
-    const checkbox = taskContainer.children[0];
-    checkbox.addEventListener('change', completed)
 
     const editBtn = document.createElement('i');
     editBtn.className = 'fa';
@@ -38,6 +35,14 @@ const populateEachTask = (arr) => {
     placeholder.appendChild(taskContainer);
 
     editBtn.addEventListener('click', editDescription);
+
+    const checkbox = document.getElementById('check-'+i)
+    checkbox.addEventListener('change', change)
+  
+    checkbox.nextSibling.classList.toggle('striked', checkbox.checked)
+   
+    console.log(i, typeof(checkbox.checked))
+
   }
 };
 
@@ -54,20 +59,23 @@ const toogle = (element) => {
   }
 }
 
-const completed = (e) => {
-  const li = e.target.closest('li');
-  const id = li.getAttribute('data-id');
-  const checkbox = li.children[0];
-  console.log(checkbox.checked);
+const change = (e) => {
+  //  const li = e.target.closest('li');
+  //  const id = li.getAttribute('data-id');
+  //  const checkbox = e.target;
   
-  // if(checkbox.checked === true) {
+  // if(checkbox.checked) {
+  //   console.log('if ',checkbox.checked);
+
   //   simpleTodoTasks[id].completed = true;
   //   populateEachTask(simpleTodoTasks);
   // } else {
+  //   console.log('else',checkbox.checked);
+
   //   simpleTodoTasks[id].completed = false;
   //   populateEachTask(simpleTodoTasks);
-  // }
-  // localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
+  //}
+  localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
 }
 
 const removeList = (e) => {
