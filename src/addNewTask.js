@@ -5,7 +5,7 @@ const addNewTask = (arr, item) => {
   function Task(item) {
     this.item = item;
     this.completed = false;
-    this.index = arr.length;
+    this.index = arr.length + 1;
   }
   const task = new Task(item);
   arr.push(task);

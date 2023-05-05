@@ -46,7 +46,7 @@ const removeList = (e) => {
   const li = e.target.closest('li');
   const id = li.getAttribute('data-id');
   removeTask(simpleTodoTasks, id);
-  simpleTodoTasks.forEach((obj, id) => { obj.index = id; });
+  simpleTodoTasks.forEach((obj, id) => { obj.index = id + 1; });
   populateEachTask(simpleTodoTasks);
 };
 
