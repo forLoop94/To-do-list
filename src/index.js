@@ -3,7 +3,6 @@ import './styles.css';
 import { addNewTask, form, input } from './addNewTask.js';
 import removeTask from './removeTask.js';
 import clearCompleted from './clearCompleted.js';
-import { isArray } from 'lodash';
 import saveToLocal from './saveToLocal.js';
 
 const placeholder = document.querySelector('ul');
@@ -11,12 +10,10 @@ const clearAllCompleted = document.querySelector('[data-clear]');
 
 // const simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
 
-const data = JSON.parse(localStorage.getItem('task'))
-if(!data) localStorage.setItem('task', '[]')
+const data = JSON.parse(localStorage.getItem('task'));
+if (!data) localStorage.setItem('task', '[]');
 
-const retrieve = () => {
-  return JSON.parse(localStorage.getItem('task'))
-}
+const retrieve = () => JSON.parse(localStorage.getItem('task'));
 
 const render = () => {
   const arr = retrieve();
@@ -45,16 +42,15 @@ const render = () => {
 
     editBtn.addEventListener('click', editDescription);
 
-    const checkbox = document.getElementById('check-'+i)
-    
-    checkbox.addEventListener('change', change)
-    if(taskDetails.completed){
+    const checkbox = document.getElementById(`check-${i}`);
+
+    checkbox.addEventListener('change', change);
+    if (taskDetails.completed) {
       checkbox.nextSibling.classList.add('strike');
-      checkbox.setAttribute('checked', '')
+      checkbox.setAttribute('checked', '');
     }
   }
 };
-
 
 form.addEventListener('submit', () => {
   const simpleTodoTasks = retrieve();
@@ -64,12 +60,12 @@ form.addEventListener('submit', () => {
 });
 
 const change = (e) => {
-   const li = e.target.closest('li');
-   const id = li.getAttribute('data-id');
-   const checkbox = e.target;
-   const simpleTodoTasks = retrieve();
-  
-  if(checkbox.checked) {
+  const li = e.target.closest('li');
+  const id = li.getAttribute('data-id');
+  const checkbox = e.target;
+  const simpleTodoTasks = retrieve();
+
+  if (checkbox.checked) {
     checkbox.nextSibling.classList.toggle('strike', true);
     simpleTodoTasks[id].completed = true;
   } else {
@@ -77,7 +73,7 @@ const change = (e) => {
     simpleTodoTasks[id].completed = false;
   }
   localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
-}
+};
 
 const removeList = (e) => {
   const simpleTodoTasks = retrieve();
@@ -115,6 +111,6 @@ clearAllCompleted.addEventListener('click', () => {
   const simpleTodoTasks = retrieve();
   clearCompleted(simpleTodoTasks);
   render();
-})
+});
 
 render();

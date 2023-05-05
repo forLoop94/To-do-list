@@ -1,4 +1,4 @@
-import saveToLocal from "./saveToLocal";
+import saveToLocal from './saveToLocal.js';
 
 const removeTask = (arr, index) => {
   arr.splice(index, 1);
