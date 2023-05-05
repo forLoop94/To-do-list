@@ -31,6 +31,8 @@ main {
 .placeholder {
   font-style: italic;
   color: rgb(154, 150, 150);
+  border: none;
+  width: 60%;
 }
 
 ul {
@@ -50,13 +52,6 @@ ul {
 
 .fa-refresh {
   padding-top: 5px;
-}
-
-.checkbox {
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid rgb(154, 150, 150);
-  float: left;
 }
 
 .fa-ellipsis-v {
@@ -86,4 +81,36 @@ ul {
   margin-right: 1rem;
   position: absolute;
   right: 0;
+}
+
+.fa-pencil,
+.fa-trash {
+  margin-right: 2.5rem;
+  position: absolute;
+  right: 0;
+}
+
+.fa-trash {
+  margin-right: 1rem;
+}
+
+.edit {
+  width: 40%;
+}
+
+.hide {
+  display: none;
+}
+
+.add-btn {
+  background: transparent;
+  border: none;
+}
+
+.fa-sign-in {
+  color: rgb(99, 96, 96);
+}
+
+form {
+  justify-content: space-between;
 }
