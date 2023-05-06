@@ -2,22 +2,30 @@
 import './styles.css';
 import { addNewTask, form, input } from './addNewTask.js';
 import removeTask from './removeTask.js';
+import clearCompleted from './clearCompleted.js';
+import saveToLocal from './saveToLocal.js';
 
 const placeholder = document.querySelector('ul');
+const clearAllCompleted = document.querySelector('[data-clear]');
 
-const simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
+// const simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
 
-const populateEachTask = (arr) => {
-  localStorage.setItem('task', JSON.stringify(arr));
+const data = JSON.parse(localStorage.getItem('task'));
+if (!data) localStorage.setItem('task', '[]');
+
+const retrieve = () => JSON.parse(localStorage.getItem('task'));
+
+const render = () => {
+  const arr = retrieve();
   placeholder.innerHTML = '';
   for (let i = 0; i < arr.length; i += 1) {
     const taskDetails = arr[i];
     const taskContainer = document.createElement('li');
     taskContainer.setAttribute('data-id', i);
     taskContainer.className = 'task-container';
-    taskContainer.innerHTML = `<input class='task-content' type='checkbox' data-check><span class='task-content description'>${taskDetails.item}</span>
-    <input class='edit hide'>
-    <span class='task-content index'></span>`;
+    taskContainer.innerHTML = `<input class='task-content' id='check-${i}' type='checkbox' data-check><span class='task-content description'>${taskDetails.item}</span>
+    <input class='edit hide' value=${taskDetails.item}>
+    <span class='task-content index'></i></span>`;
 
     const editBtn = document.createElement('i');
     editBtn.className = 'fa';
@@ -33,21 +41,47 @@ const populateEachTask = (arr) => {
     placeholder.appendChild(taskContainer);
 
     editBtn.addEventListener('click', editDescription);
+
+    const checkbox = document.getElementById(`check-${i}`);
+
+    checkbox.addEventListener('change', change);
+    if (taskDetails.completed) {
+      checkbox.nextSibling.classList.add('strike');
+      checkbox.setAttribute('checked', '');
+    }
   }
 };
 
 form.addEventListener('submit', () => {
+  const simpleTodoTasks = retrieve();
   addNewTask(simpleTodoTasks, input.value);
-  populateEachTask(simpleTodoTasks);
+  render();
   input.value = '';
 });
 
+const change = (e) => {
+  const li = e.target.closest('li');
+  const id = li.getAttribute('data-id');
+  const checkbox = e.target;
+  const simpleTodoTasks = retrieve();
+
+  if (checkbox.checked) {
+    checkbox.nextSibling.classList.toggle('strike', true);
+    simpleTodoTasks[id].completed = true;
+  } else {
+    checkbox.nextSibling.classList.toggle('strike', false);
+    simpleTodoTasks[id].completed = false;
+  }
+  localStorage.setItem('task', JSON.stringify(simpleTodoTasks));
+};
+
 const removeList = (e) => {
+  const simpleTodoTasks = retrieve();
   const li = e.target.closest('li');
   const id = li.getAttribute('data-id');
   removeTask(simpleTodoTasks, id);
-  simpleTodoTasks.forEach((obj, id) => { obj.index = id + 1; });
-  populateEachTask(simpleTodoTasks);
+  // simpleTodoTasks.forEach((obj, id) => { obj.index = id + 1; });
+  render();
 };
 
 const editDescription = (e) => {
@@ -65,10 +99,18 @@ const editDescription = (e) => {
   input.focus();
   input.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') {
+      const simpleTodoTasks = retrieve();
       simpleTodoTasks[id].item = input.value;
-      populateEachTask(simpleTodoTasks);
+      saveToLocal(simpleTodoTasks);
+      render();
     }
   });
 };
 
-populateEachTask(simpleTodoTasks);
+clearAllCompleted.addEventListener('click', () => {
+  const simpleTodoTasks = retrieve();
+  clearCompleted(simpleTodoTasks);
+  render();
+});
+
+render();
