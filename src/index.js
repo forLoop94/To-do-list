@@ -8,8 +8,6 @@ import saveToLocal from './saveToLocal.js';
 const placeholder = document.querySelector('ul');
 const clearAllCompleted = document.querySelector('[data-clear]');
 
-// const simpleTodoTasks = JSON.parse(localStorage.getItem('task')) || [];
-
 const data = JSON.parse(localStorage.getItem('task'));
 if (!data) localStorage.setItem('task', '[]');
 
@@ -80,7 +78,6 @@ const removeList = (e) => {
   const li = e.target.closest('li');
   const id = li.getAttribute('data-id');
   removeTask(simpleTodoTasks, id);
-  // simpleTodoTasks.forEach((obj, id) => { obj.index = id + 1; });
   render();
 };
 
