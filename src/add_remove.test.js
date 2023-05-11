@@ -22,4 +22,19 @@ describe('This is the addtask and removeTask functions ', () => {
     );
     expect(tasks).not.toBe([]);
   });
+  test('Remove appropriate task upon user actions', () => {
+    expect(removeTask({
+      task: 'remove task 1 from tasks',
+      id: 1,
+      status: false,
+    })).not.toStrictEqual([]);
+  });
+
+  test('Remove appropriate task upon user actions', () => {
+    expect(removeTask({
+      task: 'remove task 2 from tasks',
+      id: 1,
+      status: false,
+    })).toStrictEqual([]);
+  });
 });
