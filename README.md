@@ -87,12 +87,13 @@ To run the project, execute the following command:
 
 ### Run tests
 
-To run tests, run the following command:
+To run tests, run the following commands:
 
 ```sh
   npx stylelint "**/*.{css,scss}"
   npx hint .
   npx eslint .
+  npm test
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
