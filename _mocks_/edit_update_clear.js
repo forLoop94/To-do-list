@@ -10,5 +10,14 @@ const updateTaskStatus = (id) => {
   return selectedTodo;
 };
 
+const clearTasks = () => {
+  const selectedTodo = todoTasks.filter((task) => task.status !== true);
+  selectedTodo.forEach((task, id) => {
+    task.id = id + 1;
+  });
+  return selectedTodo;
+};
+
 exports.editTask = editTask;
 exports.updateTaskStatus = updateTaskStatus;
+exports.clearTasks = clearTasks;
