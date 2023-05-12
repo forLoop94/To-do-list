@@ -26,7 +26,7 @@ describe('This function edits, updates and clears all task upon user actions ', 
       status: true,
     });
   });
-  
+
   test('clear all completed tasks', () => {
     expect(clearTasks()).not.toBe([{
       id: 1,
